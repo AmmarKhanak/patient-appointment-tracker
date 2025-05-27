@@ -21,3 +21,14 @@ A simple RESTful API built with Flask to manage patient appointments.
 ```bash
 git clone https://github.com/AmmarKhanak/patient-appointment-tracker.git
 cd patient-appointment-tracker
+
+### 2. Setup virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+###Install Dependencies
+pip install -r requirements.txt
+### Run the app
+python app.py
+
+### Then go to http://localhost:5000 in your browser or test endpoints using Postman.
