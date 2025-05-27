@@ -1,0 +1,32 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# In-memory list to store appointments
+appointments = []
+
+@app.route("/")
+def home():
+    return "Patient Appointment Tracker API is running."
+
+@app.route("/appointments", methods=["GET"])
+def get_appointments():
+    return jsonify(appointments)
+
+@app.route("/appointments", methods=["POST"])
+def add_appointment():
+    data = request.get_json()
+    if not data.get("patient_name") or not data.get("time"):
+        return jsonify({"error": "Missing data"}), 400
+    
+    new_appt = {
+        "id": len(appointments) + 1,
+        "patient_name": data["patient_name"],
+        "time": data["time"],
+        "status": "pending"
+    }
+    appointments.append(new_appt)
+    return jsonify(new_appt), 201
+
+if __name__ == "__main__":
+    app.run(debug=True)
